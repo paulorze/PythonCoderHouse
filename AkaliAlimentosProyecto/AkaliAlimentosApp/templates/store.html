@@ -1,0 +1,72 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Tienda
+</h1>
+<form action="store" method="get" class="form" id="form__busqueda">
+    {% csrf_token %}
+    <div class="form__input">
+        <input required="required" type="text" name="searchterm" placeholder=" ">
+            <span>Buscar por producto</span>
+        <i></i>
+    </div>
+    <button type="submit" value="send" class="buscar__button">
+        <img src="{% static 'assets/img/icono_search.png' %}" alt="Buscar">
+    </button>
+</form>
+<section class="tienda">
+    {% for product in products %}
+    <div class="tienda__producto">
+        <div class="tienda__producto__imagen">
+            <img src="{{product.img}}" alt="{{product.title}}">
+        </div>
+        <h3 class="tienda__producto__nombre">
+            {{product.name}}
+        </h3>
+        <p class="tienda__producto__descripcion">
+            {{product.short_description}}
+        </p>
+        <p class="tienda__producto__precio">
+            ${{product.price}}
+        </p>
+        <div class="tienda__producto__botones">
+            {% if "Alimento" in product.category %}
+            <select name="" id="" class="cantidad">
+                <option value="1">1 kg.</option>
+                <option value="2">2 kg.</option>
+                <option value="3">3 kg.</option>
+                <option value="4">4 kg.</option>
+                <option value="5">5 kg.</option>
+                <option value="6">6 kg.</option>
+                <option value="7">7 kg.</option>
+                <option value="8">8 kg.</option>
+                <option value="9">9 kg.</option>
+                <option value="10">10 kg.</option>
+            </select>
+            {% else %}
+            <select name="" id="" class="cantidad">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            {% endif %}
+        </div>
+        <button class="card__boton">
+            Añadir al carrito
+        </button>
+    </div>
+    {% endfor %}
+</section>
+<div class="carrito__container carrito__inactivo">
+</div>
+<div class="imagen__carrito">
+    <img src="{% static 'assets/img/carrito.png' %}" alt="Logo carrito.">
+</div>
+
+{% endblock content %}

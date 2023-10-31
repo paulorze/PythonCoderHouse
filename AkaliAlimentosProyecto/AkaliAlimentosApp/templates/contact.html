@@ -1,0 +1,57 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Contacto
+</h1>
+<section class="contacto">
+    <article class="contacto__telefono">
+        <h2>
+            Teléfono
+        </h2>
+        <p>
+            Podés comunicarte con nosotros haciendo click en el ícono de Whatsapp que aparecerá abajo a la derecha en tu pantalla. Si preferís hablar con nosotros por teléfono, podés hacerlo llamando al <a href="tel:+541187654321">+541187654321</a>.
+        </p>
+    </article>
+    <article class="contacto__correo">
+        <h2>
+            Correo Electrónico
+        </h2>
+        <p>
+            Para consultas y sugerencias, podés mandarnos un mail completando el siguiente formulario, lo responderemos a la brevedad:
+        </p>
+        {% if form.errors %}
+        <p style="color:red">Por favor, verifique los datos ingresados</p>
+        {% endif %}
+        <form action="contact" method="post" class="form">
+            {% csrf_token %}
+            <div class="form__input">
+                <input required="required" type="text" name="name" placeholder=" ">
+                    <span>Nombre</span>
+                <i></i>
+            </div>
+            <div class="form__input">
+                <input required="required" type="email" name="email" placeholder=" ">
+                    <span>Correo Electrónico</span>
+                <i></i>
+            </div>
+            <div class="form__body">
+                <textarea name = "body" required="required" placeholder="Escriba aquí..."></textarea>
+                <i></i>
+            </div>
+            <div class="form__buttons">
+                <button type="submit" value="send" class="form__button">
+                    Enviar Formulario
+                </button>
+                <button type="reset" value="reset form" class="form__button">
+                    Vaciar Formulario
+                </button>
+            </div>
+        </form>
+    </article>
+</section>
+
+{% endblock content %}

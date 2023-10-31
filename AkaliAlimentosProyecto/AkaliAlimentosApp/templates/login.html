@@ -1,0 +1,39 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Login
+</h1>
+<section class="login">
+    <form action="login" method="post" class="form">
+        {% csrf_token %}
+        <div class="form__input">
+            <input required="required" type="text" name="username" placeholder=" ">
+                <span>Nombre de Usuario</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="password" name="password" placeholder=" ">
+                <span>Contraseña</span>
+            <i></i>
+        </div>
+        {% if 'error' and request.method == 'POST' %}
+        <p class="errormsg">Por favor, verifique las credenciales ingresadas.</p>
+        {% endif %}
+        <div class="form__buttons">
+            <button type="submit" value="send" class="form__button">
+                Iniciar Sesión
+            </button>
+            <a href="{% url 'register' %}">
+                <button type="button" value="register" class="form__button">
+                    Registrarse
+                </button>
+            </a>
+        </div>
+    </form>
+</section>
+
+{% endblock content %}

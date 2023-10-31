@@ -1,0 +1,50 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+<h1>
+    Sobre Nosotros
+</h1>
+<section class="sobreNosotros">
+    <div class="sobreNosotros__imagen imagen1">
+        <img src="{% static 'assets/img/imagen_placeholder2.png' %}" alt="Nuestra gata Akali">
+    </div>
+    <div class="sobreNosotros__texto">
+        <p>
+            Akali nació como un proyecto a partir de la necesidad que teníamos como responsables de 
+            nuestra gatita de mismo nombre de darle un alimento que respondiera a sus necesidades 
+            nutricionales y al funcionamiento de su sistema.
+        </p>
+        <p>
+            Debido a experiencias con mascotas anteriores, en las casas de nuestros padres, nos dimos 
+            cuenta que el alimento balanceado tradicional podía cubrir las necesidades básicas de 
+            nuestra michita, pero al ser un alimento seco, podía generarle inconvenientes a su salud. 
+            Por otro lado, simplemente darle de comer carne cruda nos pareció insuficiente ya que, en 
+            la naturaleza, un felino comería animales más pequeños enteros, de los cuales obtienen un 
+            perfil nutricional mucho más completo que el que un simple pedazo de carne puede ofrecerle.
+        </p>
+    </div>
+    <div class="sobreNosotros__imagen imagen2">
+        <img src="{% static 'assets/img/imagen_placeholder2.png' %}" alt="Nuestra gata Akali">
+    </div>
+    <div class="sobreNosotros__texto">
+        <p>
+            Es frente a esta disyuntiva que nos pusimos a investigar y dimos con diversas recetas de 
+            alimento húmedo que contienen todo el valor nutricional de un alimento balanceado 
+            tradicional, sin sus desventajas. A su vez, al tener la posibilidad de porcionarla, se 
+            facilita mucho el control de la cantidad de la comida que come la michi, su almacenamiento 
+            en el freezer y su posterior descongelamiento para el consumo.
+        </p>
+        <p>
+            Lo hacemos con los materiales de mejor calidad que pudimos obtener y con las carnes que 
+            nosotros mismos (como humanos compañeros de Akali) consumiríamos. Podés saber exactamente 
+            qué le ponemos a cada receta <a href="#">haciendo click acá</a>.
+        </p>
+        <p>
+            Esperamos que tanto tu gatit@ como vos puedan disfrutar de nuestros productos y 
+            con ellos puedan tener una vida mucho más plena.
+        </p>
+    </div>
+</section>
+{% endblock content %}

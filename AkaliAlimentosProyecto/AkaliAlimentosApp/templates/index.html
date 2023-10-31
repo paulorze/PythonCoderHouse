@@ -1,4 +1,4 @@
-{% extends 'AkaliAlimentosApp/templates/parent.html' %}
+{% extends 'parent.html' %}
 
 {% load static %}
 
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="index__articulo__imagen">
-                <img src="./images/imagen_placeholder.png" alt="Akali curiosa">
+                <img src="{% static 'assets/img/imagen_placeholder.png' %}" alt="Akali curiosa">
             </div>
         </article>
     </a>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="index__articulo__imagen">
-                <img src="./images/imagen_placeholder2.png" alt="Akali comprando">
+                <img src="{% static 'assets/img/imagen_placeholder2.png' %}" alt="Akali comprando">
             </div>
         </article>
     </a>

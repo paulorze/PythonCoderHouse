@@ -1,0 +1,59 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Crear Nuevo Usuario
+</h1>
+<section class="register">
+    {% if form.errors %}
+    <p style="color:red">Por favor, verifique los datos ingresados</p>
+    {% endif %}
+    <form action="register" method="post" class="form">
+        {% csrf_token %}
+        <div class="form__input">
+            <input required="required" type="text" name="username" placeholder=" ">
+                <span>Nombre de Usuario</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="password" name="password" placeholder=" ">
+                <span>Contraseña</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="password" name="confirm_password" placeholder=" ">
+                <span>Reingrese su Contraseña</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="first_name" placeholder=" ">
+                <span>Nombre</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="last_name" placeholder=" ">
+                <span>Apellido</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="email" name="email" placeholder=" ">
+                <span>Correo Electrónico</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="address" placeholder=" ">
+                <span>Dirección</span>
+            <i></i>
+        </div>
+        <div class="form__buttons">
+            <button type="submit" value="send" class="form__button">
+                Registrarse
+            </button>
+        </div>
+    </form>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Dashboard
+</h1>
+<section class="user__dashboard">
+    <div class="user__dashboard__data">
+        <h3>
+            Tus datos:
+        </h3>
+        <p>
+            Nombre de Usuario: <strong>{{user.username}}</strong> 
+        </p>
+        <p>
+            Nombre: <strong>{{user.first_name}}</strong>
+        </p>
+        <p>
+            Apellido: <strong>{{user.last_name}}</strong>
+        </p>
+        <p>
+            Correo Electrónico: <strong>{{user.email}}</strong>
+        </p>
+        <p>
+            Dirección: <strong>{{user.address}}</strong>
+        </p>
+    </div>
+    <div class="user__dashboard__aside">
+        <a href="{% url 'index' %}">
+            <button class="form__button">
+                Modificar Datos
+            </button>
+        </a>
+        <a href="{% url 'logout' %}">
+            <button class="form__button" id="button__logout">
+                Cerrar Sesión
+            </button>
+        </a>
+    </div>
+</section>
+
+{% endblock content %}
