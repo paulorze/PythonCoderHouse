@@ -68,6 +68,11 @@ h3 {
     text-align: center;
 }
 
+.toasty {
+    font-size: 2rem;
+    border-radius: 4px;
+}
+
 /* HEADER */
 .header {
     background-color: var(--color-secondary);
@@ -98,14 +103,16 @@ h3 {
 }
 
 .header__banner__nombre__titulo {
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--color-accent);
     font-weight: bold;
     margin: 0;
 }
 
 .iconos__login {
-    position: relative;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
 }
 
 .icono__login {
@@ -134,6 +141,10 @@ h3 {
     padding: 0; 
     width: 5rem;
     height: 5rem;
+    position: absolute;
+    top: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .header__navbar__menu__icono img {
@@ -319,21 +330,6 @@ footer p {
     width: 100%;
 }
 
-.imagen__carrito {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 1.5rem;
-    width: 7rem;
-    height: 7rem;
-    z-index: 2;
-    cursor: pointer;
-}
-
-.imagen__carrito img {
-    height: 100%;
-    width: 100%;
-}
-
 /* INDEX */
 .index {
     padding: 1rem;
@@ -512,20 +508,21 @@ footer p {
     text-align: center;
 }
 
-.tienda__producto__botones {
+.card__form {
     color: var(--color-font);
     background-color: var(--color-accent2);
     width: 100%;
+    height: 95px;
     font-size: 2rem;
     position: absolute;
     top: 390px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
     padding: 0 1rem 0 1rem;
 }
 
-.tienda__producto__botones .cantidad {
+.card__form .cantidad {
     width: 6rem;
     height: 3rem;
     justify-self: center;
@@ -591,137 +588,6 @@ footer p {
 .toasty {
     font-size: 1.5rem;
     border-radius: 4px;
-}
-
-.carrito__container {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 5;
-    background-color: var(--color-main);
-    background-color: rgba(220, 220, 221,0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.carrito__inactivo {
-    display: none;
-}
-
-.carrito {
-    position: relative;
-    border: 0.25rem solid var(--color-border);
-    box-shadow: 1px 1px 10px var(--color-border);
-    background-color: var(--color-main);
-    z-index: 6;
-    padding: 1rem;
-    width: 80rem;
-}
-
-.carrito h3 {
-    text-align: center;
-}
-
-.carrito__cerrar {
-    position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 2rem;
-    padding: 0;
-    color: red;
-    cursor: pointer;
-}
-
-.carrito__producto {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
-.carrito__producto p {
-    margin: 0;
-}
-
-.carrito__producto .boton {
-    padding: 0.5rem;
-    font-size: 1.25rem;
-}
-
-.carrito__producto .boton::before {
-    transition: .1s ease;
-}
-
-.eliminar__producto{
-    color: red;
-}
-
-.eliminar__producto:hover {
-    color: red;
-}
-
-.eliminar__producto::before {
-    background-color: red;
-}
-
-.carrito__total {
-    text-align: right;
-}
-
-.carrito__botones {
-    margin: 1rem;
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.carrito__botones .boton {
-    z-index: 7;
-    overflow: hidden;
-}
-
-.carrito__botones .boton::before {
-    transition: .2s ease-in-out;
-}
-
-.carrito__botones .boton::after {
-    content: '';
-    position: absolute;
-    left: -22rem;
-    bottom: -7rem;
-    height: 100%;
-    width: 100%;
-    background-color: var(--color-secondary);
-    border-radius: 4px 4px 0 0;
-    transition: .2s ease;
-    z-index: -1;
-}
-
-.carrito__botones .boton:hover::after {
-    left: 0;
-    bottom: 0;
-    background-color: var(--color-secondary);
-    transition: .2s ease;
-    z-index: -1;
-    height: 100%;
-}
-
-.carrito__botones .vaciar {
-    color: red;
-}
-
-.carrito__botones .vaciar:hover {
-    color: red;
-}
-
-.carrito__botones .vaciar::before {
-    background-color: red;
-    transition: .2s ease;
 }
 
 /* CONTACT */
@@ -941,6 +807,84 @@ footer p {
     flex-wrap: wrap;
 }
 
+.form__input label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.form__input label select {
+    padding: 1rem;
+    margin: 1rem;
+    background-color: transparent;
+    border-radius: 4px;
+    border: 1px solid var(--color-accent);
+    outline: none;
+}
+/* CART */
+.cart {
+    font-size: 1.5rem;
+}
+
+.cart__nombreproducto {
+    font-size: 2rem;
+}
+
+.cart__subtotal {
+    font-size: 1.75rem
+}
+
+.cart__total {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.cart__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.cart__iconbutton {
+    width: 4rem;
+    height: 4rem;
+    padding: .25rem;
+    outline: none;
+    border-radius: 4px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px transparent;
+}
+
+.edit {
+    background-color: var(--color-accent);
+}
+
+.trash {
+    background-color: red;
+}
+
+.cart__iconbutton img {
+    width: 3rem;
+}
+
+.cart__iconbutton:hover {
+    border: 1px solid var(--color-border);
+}
+
+.cart__buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
 /* ERRORPAGE */
 .errorpage {
     width: 100%;
@@ -1013,6 +957,10 @@ footer p {
 }
 
 @media screen and (min-width: 768px) {
+    .header__banner__nombre__titulo {
+        font-size: 3.5rem;
+    }
+
     .header__navbar__menu__ul {
         width: 100%;
         display: flex;
@@ -1113,7 +1061,7 @@ footer p {
         right: 3rem;
     }
 
-    .whatsapp:hover, .imagen__carrito:hover {
+    .whatsapp:hover {
         transform: scale(1.1);
         transition: .2s linear;
     }
@@ -1124,13 +1072,6 @@ footer p {
 
     .buscar__button:hover {
         background-color: var(--color-accent);
-    }
-
-    .imagen__carrito {
-        width: 8rem;
-        height: 8rem;
-        bottom: 3rem;
-        left: 3rem;
     }
 
     .index__articulo {
@@ -1227,6 +1168,16 @@ footer p {
 
     .card:hover .card__descripcion {
         transform: translateY(100%);
+    }
+}
+
+@media  screen and (min-width: 992px) {
+    .header__banner__nombre__titulo {
+        font-size: 4rem;
+    }
+
+    .iconos__login {
+        position: relative;
     }
 }
 

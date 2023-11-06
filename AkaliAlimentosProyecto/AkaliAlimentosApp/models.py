@@ -24,12 +24,11 @@ class Product(models.Model):
     img = models.CharField(max_length=150, default = "{% static 'assets/img/icono_placeholder.png' %}")
 
 class Cart(models.Model):
-    username = models.CharField(max_length=20)
-    email = models.CharField(max_length=30)
-    products = models.ManyToManyField(Product, through='CartToProduct')
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    productlist = models.ManyToManyField('CartToProduct', related_name='productlist')
 
 class CartToProduct(models.Model):
-    cart = models.ForeignKey(Cart, on_delete = models.CASCADE)
+    cart = models.ForeignKey(Cart, on_delete = models.CASCADE, default = 1)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity  = models.PositiveIntegerField()
 

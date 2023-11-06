@@ -33,9 +33,11 @@
         <p class="tienda__producto__precio">
             ${{product.price}}
         </p>
-        <div class="tienda__producto__botones">
+        <form action="manageCart" method="post" class="card__form">
+            {% csrf_token %}
+            <input type="hidden" name="product_id" value="{{product.pk}}">
             {% if "Alimento" in product.category %}
-            <select name="" id="" class="cantidad">
+            <select name="quantity" id="" class="cantidad">
                 <option value="1">1 kg.</option>
                 <option value="2">2 kg.</option>
                 <option value="3">3 kg.</option>
@@ -48,7 +50,7 @@
                 <option value="10">10 kg.</option>
             </select>
             {% else %}
-            <select name="" id="" class="cantidad">
+            <select name="quantity" id="" class="cantidad">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -56,17 +58,12 @@
                 <option value="5">5</option>
             </select>
             {% endif %}
-        </div>
-        <button class="card__boton">
-            Añadir al carrito
-        </button>
+            <button type="submit" class="card__boton">
+                Añadir al carrito
+            </button>
+        </form>
     </div>
     {% endfor %}
 </section>
-<div class="carrito__container carrito__inactivo">
-</div>
-<div class="imagen__carrito">
-    <img src="{% static 'assets/img/carrito.png' %}" alt="Logo carrito.">
-</div>
 
 {% endblock content %}

@@ -4,4 +4,78 @@
 
 {% block content %}
 
+<h1>
+    Carrito
+</h1>
+{% if products %}
+<section class="container-fluid text-center cart">
+    {% for product in products %}
+    <div class="row">
+        <div class="col-12 col-sm-10">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-lg-4">
+                    <strong class="cart__nombreproducto">
+                        {{product.product.name}}
+                    </strong>
+                </div>
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <p>Cantidad: {{product.quantity}}</p>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="col-sm-12">
+                                <p>
+                                    Precio por Unidad: ${{product.product.price}}
+                                </p>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <strong class="cart__subtotal">
+                                    Subtotal: $9999
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-2  cart__actions">
+            <button class="cart__iconbutton edit">
+                <img src="{% static 'assets/img/icono_edit.png' %}" alt="Editar">
+            </button>
+            <button class="cart__iconbutton trash">
+                <img src="{% static 'assets/img/icono_thrash.png' %}" alt="Editar">
+            </button>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+    <div class="row cart__total">
+        <div class="col-8">
+            Total:
+        </div>
+        <div class="col-4">
+            $ 9999
+        </div>
+    </div>
+    <div class="row cart__buttons">
+        <div class="col-12"></div>
+        <div class="col-12 col-sm-6">
+            <button class="form__button">
+                Confirmar Compra
+            </button>
+        </div>
+        <div class="col-12 col-sm-6">
+            <button class="form__button" id="button__logout">
+                Vaciar Carrito
+            </button>
+        </div>
+    </div>
+</section>
+{% else %}
+<h2>
+    Aún no tiene productos en su carrito.
+</h2>
+{% endif %}
+
 {% endblock content %}

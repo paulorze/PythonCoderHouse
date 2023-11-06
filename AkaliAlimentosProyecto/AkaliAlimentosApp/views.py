@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
 from .models import *
 from .forms import *
@@ -32,8 +32,28 @@ def contact(request):
         return render(request, 'contact.html',{"form": form})
 
 def cart(request):
-    # ACA HAY QUE HACER QUE BUSQUE EL CARRITO DEL USUARIO
-    return render(request, 'cart.html')
+    if request.user.is_authenticated:
+        user = request.user
+        cart, create = Cart.objects.get_or_create(user=user)
+        products = cart.productlist.all()
+        return render(request, 'cart.html', {"products": products})
+    else:
+        return render(request,'cart.html', {"products": []})
+
+def manageCart(request):
+    if request.method == 'POST':
+        user = request.user
+        cart, create = Cart.objects.get_or_create(user=user)
+        product_id = request.POST['product_id']
+        try:
+            product = Product.objects.get(pk=product_id)
+            quantity = request.POST['quantity']
+            cart_item = CartToProduct.objects.create(cart = cart, product = product, quantity = quantity)
+            cart.productlist.add(cart_item)
+            response_data = {'message': 'Producto agregado al carrito ✔', 'success': True}
+        except:
+            response_data = {'message': 'Ocurrió un error', 'success': False}
+        return JsonResponse(response_data)
 
 def loginview(request):
     if request.method == 'POST':
@@ -74,6 +94,8 @@ def register(request):
             hashed_password = make_password(data["password"])
             user = User(username = data["username"], password = hashed_password,first_name = data["first_name"],last_name = data["last_name"],email = data["email"],address = data["address"])
             user.save()
+            cart = Cart.objects.create(user = user)
+            cart.save()
             return redirect('login')
     else:
         form = RegisterForm()
