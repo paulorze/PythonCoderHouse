@@ -31,7 +31,7 @@ Sitio web diseñado para AkaliAlimentos, emprendimiento productor de alimento ba
 
 ## Pruebas y video de funcionamiento
 Para ver las pruebas realizadas, hace click [aquí](https://docs.google.com/spreadsheets/d/1LK0ikRHCsQOmwIX5LgX-PJw0ickKvjfIBcOJuXcyy6o/edit?usp=sharing).
-El video explicativo del funcionamiento del sitio esta [aquí]().
+El video explicativo del funcionamiento del sitio esta [aquí](https://youtu.be/xF3mOaRSh9A).
 
 ## Lecciones Aprendidas
 
