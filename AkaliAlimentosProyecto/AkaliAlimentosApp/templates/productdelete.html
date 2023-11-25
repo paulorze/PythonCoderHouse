@@ -1,0 +1,21 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Borrar Producto
+</h1>
+
+<form action="" method="POST" class="form__delete">
+    {% csrf_token %}
+    <h3>
+        ¿Estás seguro que deseas eliminar el producto {{product.name}} ?
+    </h3>
+    <button type="submit" class="form__button" id="button__logout">
+        ELIMINAR
+    </button>
+</form>
+
+{% endblock content %}

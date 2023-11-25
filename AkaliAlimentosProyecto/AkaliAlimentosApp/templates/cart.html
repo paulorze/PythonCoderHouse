@@ -3,35 +3,36 @@
 {% load static %}
 
 {% block content %}
-
 <h1>
     Carrito
 </h1>
-{% if products %}
+{% if cart.productlist.count > 0 %}
 <section class="container-fluid text-center cart">
-    {% for product in products %}
+    {% for cart_to_product in cart.productlist.all %}
     <div class="row">
         <div class="col-12 col-sm-10">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-4">
-                    <strong class="cart__nombreproducto">
-                        {{product.product.name}}
-                    </strong>
+                    <a href="{% url 'productDetail' cart_to_product.product.pk %}">
+                        <strong class="cart__nombreproducto">
+                            {{cart_to_product.product.name}}
+                        </strong>
+                    </a>
                 </div>
                 <div class="col-12 col-lg-8">
                     <div class="row">
                         <div class="col-12 col-sm-6">
-                            <p>Cantidad: {{product.quantity}}</p>
+                            <p>Cantidad: {{cart_to_product.quantity}}</p>
                         </div>
                         <div class="col-12 col-sm-6">
                             <div class="col-sm-12">
                                 <p>
-                                    Precio por Unidad: ${{product.product.price}}
+                                    Precio por Unidad: ${{cart_to_product.product.price}}
                                 </p>
                             </div>
                             <div class="col-12 col-sm-12">
                                 <strong class="cart__subtotal">
-                                    Subtotal: $9999
+                                    Subtotal: $ {{cart_to_product.calculate_subtotal}}
                                 </strong>
                             </div>
                         </div>
@@ -40,12 +41,12 @@
             </div>
         </div>
         <div class="col-12 col-sm-2  cart__actions">
-            <button class="cart__iconbutton edit">
-                <img src="{% static 'assets/img/icono_edit.png' %}" alt="Editar">
-            </button>
-            <button class="cart__iconbutton trash">
-                <img src="{% static 'assets/img/icono_thrash.png' %}" alt="Editar">
-            </button>
+            <form action="{% url 'cartDelete' pk=cart_to_product.pk %}" method="POST" class="carttoproduct__form">
+                {% csrf_token %}
+                <button type="submit" class="cart__iconbutton trash">
+                    <img src="{% static 'assets/img/icono_thrash.png' %}" alt="Editar">
+                </button>
+            </form>
         </div>
     </div>
     <hr>
@@ -55,15 +56,18 @@
             Total:
         </div>
         <div class="col-4">
-            $ 9999
+            $ {{cart.total}}
         </div>
     </div>
     <div class="row cart__buttons">
         <div class="col-12"></div>
         <div class="col-12 col-sm-6">
-            <button class="form__button">
-                Confirmar Compra
-            </button>
+            <form action="{% url 'checkout' %}" method="POST">
+                {% csrf_token %}
+                <button class="form__button">
+                    Confirmar Compra
+                </button>
+            </form>
         </div>
         <div class="col-12 col-sm-6">
             <button class="form__button" id="button__logout">

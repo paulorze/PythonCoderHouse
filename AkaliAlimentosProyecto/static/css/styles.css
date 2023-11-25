@@ -121,7 +121,7 @@ h3 {
 }
 
 .icono__login img {
-    filter: var(--filter-light);
+    border-radius: 50%;
 }
 
 .icono__login__loggedin {
@@ -314,8 +314,8 @@ footer p {
     margin: auto;
 }
 
-/* WHATSAPP Y CARRITO */
-.whatsapp {
+/* WHATSAPP Y AGREGAR PRODUCTO ICONO */
+.whatsapp, .icono__agregarproducto {
     position:fixed ;
     bottom: 1.5rem ;
     right: 1.5rem ;
@@ -325,10 +325,17 @@ footer p {
     z-index: 2;
 }
 
-.whatsapp img {
+.whatsapp img, .icono__agregarproducto img {
     height: 100%;
     width: 100%;
 }
+
+.icono__agregarproducto {
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    padding: 1rem;
+}
+
 
 /* INDEX */
 .index {
@@ -469,6 +476,7 @@ footer p {
     overflow: hidden;
     position: absolute;
     top: 0;
+    left: 0;
 }
 
 .tienda__producto__imagen img {
@@ -483,6 +491,7 @@ footer p {
     font-size: 2rem;
     position: absolute;
     top: 230px;
+    left: 0;
     font-weight: bold;
     text-align: center;
 }
@@ -585,6 +594,22 @@ footer p {
         height: 100%;
 }
 
+#edit__product {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+}
+
+#delete__product {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: 25px;
+    right: 40px;
+}
+
 .toasty {
     font-size: 1.5rem;
     border-radius: 4px;
@@ -637,6 +662,7 @@ footer p {
 
 .form__addproduct {
     max-width: 550px;
+    justify-self: center;
 }
 
 .form__input {
@@ -894,13 +920,77 @@ footer p {
     }
 }
 
+/* NEW PRODUCT */
+.addproduct {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* DELETEPRODUCT */
+.form__delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form__delete h3 {
+    font-weight: bold;
+    color: red;
+}
+
+/* DETAIL PRODUCT */
+.detalle__subtitulo, .detalle__preciostock, .detalle__imagentexto {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.detalle__preciostock h3 {
+    font-weight: bold;
+}
+
+#detalle__form {
+    background-color: transparent;
+    position: relative;
+    top: auto;
+}
+
+#detalle__form select {
+    margin: 1rem;
+}
+
+#detalle__form__boton {
+    position: relative;
+}
+
+.card__form .cantidad {
+    width: 6rem;
+    height: 3rem;
+    justify-self: center;
+}
+
+.detalle__imagentexto img{
+    width: 300px;
+    border-radius: 4px;
+}
+
+.detalle__imagentexto p {
+    font-size: 2rem;
+    text-align: center;
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 380px) {
     .form__input span {
         font-size: 1.5rem;
     }
 
-    .whatsapp {
+    .whatsapp, .icono__agregarproducto {
         height: 6rem;
         width: 6rem;
     }
@@ -1054,14 +1144,14 @@ footer p {
         font-size: 1.5rem;
     }
 
-    .whatsapp {
+    .whatsapp, .icono__agregarproducto {
         width: 8rem;
         height: 8rem;
         bottom: 3rem;
         right: 3rem;
     }
 
-    .whatsapp:hover {
+    .whatsapp:hover, .icono__agregarproducto:hover {
         transform: scale(1.1);
         transition: .2s linear;
     }
@@ -1168,6 +1258,10 @@ footer p {
 
     .card:hover .card__descripcion {
         transform: translateY(100%);
+    }
+
+    .detalle__imagentexto p {
+        max-width: 50vw;
     }
 }
 

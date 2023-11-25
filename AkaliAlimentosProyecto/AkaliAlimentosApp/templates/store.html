@@ -10,7 +10,7 @@
 <form action="store" method="get" class="form" id="form__busqueda">
     {% csrf_token %}
     <div class="form__input">
-        <input required="required" type="text" name="searchterm" placeholder=" ">
+        <input type="text" name="searchterm" placeholder=" ">
             <span>Buscar por producto</span>
         <i></i>
     </div>
@@ -19,21 +19,28 @@
     </button>
 </form>
 <section class="tienda">
+    {% if products.count == 0 %}
+    <h2>
+        No hay productos para mostrar.
+    </h2>
+    {% endif %}
     {% for product in products %}
     <div class="tienda__producto">
-        <div class="tienda__producto__imagen">
-            <img src="{{product.img}}" alt="{{product.title}}">
-        </div>
-        <h3 class="tienda__producto__nombre">
-            {{product.name}}
-        </h3>
+        <a href="{% url 'productDetail' product.pk   %}">
+            <div class="tienda__producto__imagen">
+                <img src="{{product.img}}" alt="{{product.title}}">
+            </div>
+            <h3 class="tienda__producto__nombre">
+                {{product.name}}
+            </h3>
+        </a>
         <p class="tienda__producto__descripcion">
             {{product.short_description}}
         </p>
         <p class="tienda__producto__precio">
             ${{product.price}}
         </p>
-        <form action="manageCart" method="post" class="card__form">
+        <form action="manageCart" method="post" class="card__form"     {% if user.is_authenticated %} {% if user.is_superuser%} style="display:none" {% endif %} {% endif %}>
             {% csrf_token %}
             <input type="hidden" name="product_id" value="{{product.pk}}">
             {% if "Alimento" in product.category %}
@@ -58,12 +65,41 @@
                 <option value="5">5</option>
             </select>
             {% endif %}
+            {% if user.is_authenticated %}
             <button type="submit" class="card__boton">
                 Añadir al carrito
             </button>
+            {% else %}
+            <button type="button" class="card__boton" onclick="redirectToLogin()">
+                Añadir al carrito
+            </button>
+            {% endif %}
         </form>
+        {% if user.is_authenticated %}
+            {% if user.is_superuser%}
+            <a href="{% url 'productUpdate' product.pk   %}">
+                <button class="cart__iconbutton edit" id="edit__product">
+                    <img src="{% static 'assets/img/icono_edit.png' %}" alt="Editar">
+                </button>
+            </a>
+            <a href="{% url 'productDelete' product.pk   %}">
+                <button class="cart__iconbutton trash" id="delete__product">
+                    <img src="{% static 'assets/img/icono_thrash.png' %}" alt="Editar">
+                </button>
+            </a>
+            {% endif %}
+        {% endif %}
     </div>
     {% endfor %}
 </section>
+{% if user.is_authenticated %}
+    {% if user.is_superuser%}
+    <div class="icono__agregarproducto">
+        <a href="{% url 'productNew' %}">
+            <img src="{% static 'assets/img/icono_agregar.png' %}" alt="Agregar Producto">
+        </a>
+    </div>
+    {% endif %}
+{% endif %}
 
 {% endblock content %}

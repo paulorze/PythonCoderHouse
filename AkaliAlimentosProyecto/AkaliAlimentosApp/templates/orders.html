@@ -1,0 +1,63 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Mis Últimas Compras
+</h1>
+{% if orders.count > 0 %}
+<section class="container-fluid text-center cart">
+    {% for order in orders %}
+    <div class="row">
+        <div class="col-12 col-sm-10">
+            <div class="row">
+                <div class="col-12">
+                    <strong class="cart__nombreproducto">
+                        {{order.purchase_time}}
+                    </strong>
+                </div>
+                {% for product in order.order_items.all %}
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="col-sm-12">
+                                <strong>
+                                    {{product.product_name}}
+                                </strong>
+                            </div>
+                            <div class="col-sm-12">
+                                <p>Cantidad: {{product.quantity}}</p>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6">
+                            <div class="col-sm-12">
+                                <p>
+                                    Precio por Unidad: ${{product.product_price}}
+                                </p>
+                            </div>
+                            <div class="col-12 col-sm-12">
+                                <strong class="cart__subtotal">
+                                    Subtotal: $ {{product.subtotal}}
+                                </strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-12 col-sm-2 cart__total">
+            <strong>TOTAL: ${{order.total}}</strong>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+</section>
+{% else %}
+<h2>
+    Aún no realizó ninguna compra.
+</h2>
+{% endif %}
+{% endblock content %}

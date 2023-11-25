@@ -75,7 +75,7 @@
                     <a href="{% url 'dashboard' %}">
                         <div class="navbar-brand header__navbar__nombre iconos__login">
                             <div class="header__banner__nombre__icono icono__login">
-                                <img src="{% static 'assets/img/icono_login.png' %}" alt="Ícono de Akali Alimentos">
+                                <img {% if user.avatar%} src="{{user.avatar.img.url}}" {% else %} src="{% static 'assets/img/icono_login.png' %}" {% endif %} alt="Ícono de User">
                             </div>
                             <div class="icono__login__loggedin">
                                 <img src="{% static 'assets/img/icono_tick.png' %}" alt="Usuario loggeado">
@@ -86,7 +86,7 @@
                     <a href="{% url 'login' %}">
                         <div class="navbar-brand header__navbar__nombre iconos__login">
                             <div class="header__banner__nombre__icono icono__login">
-                                <img src="{% static 'assets/img/icono_login.png' %}" alt="Ícono de Akali Alimentos">
+                                <img src="{% static 'assets/img/icono_login.png' %}" alt="Ícono de Usuario">
                             </div>
                         </div>
                     </a>
@@ -98,7 +98,7 @@
             {% block content %}
             {% endblock content %}
         </main>
-        <div class="whatsapp">
+        <div class="whatsapp" {% if user.is_authenticated %} {% if user.is_superuser %} style="display:none" {% endif %} {% endif %}>
             <a href="https://api.whatsapp.com/send/?phone=5491187654321" target="_blank">
                 <img src="{% static 'assets/img/icono_whatsapp.png' %}" alt="Whatsapp">
             </a>

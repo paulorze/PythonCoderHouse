@@ -1,0 +1,49 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Actualizar Datos de {{user.username}}
+</h1>
+<section class="register">
+    {% if form.errors %}
+    <p style="color:red">Por favor, verifique los datos ingresados</p>
+    {% endif %}
+    <form action="" method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        <div class="form__input">
+            <input required="required" type="text" name="first_name" placeholder=" " value="{{user.first_name}}">
+                <span>Nombre</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="last_name" placeholder=" " value="{{user.last_name}}">
+                <span>Apellido</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="email" name="email" placeholder=" " value="{{user.email}}">
+                <span>Correo Electrónico</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="address" placeholder=" " value="{{user.address}}">
+                <span>Dirección</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="file" name="img" placeholder=" ">
+                <span>Dirección</span>
+            <i></i>
+        </div>
+        <div class="form__buttons">
+            <button type="submit" value="send" class="form__button">
+                Actualizar Datos
+            </button>
+        </div>
+    </form>
+</section>
+
+{% endblock content %}

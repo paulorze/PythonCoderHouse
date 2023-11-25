@@ -1,0 +1,77 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Agregar un nuevo producto
+</h1>
+<div class="addproduct">
+    {% if form.errors %}
+    <p class="errormsg">Por favor, verifique los datos ingresados</p>
+    {% endif %}
+    <form action="" method="POST" class="form form__addproduct">
+        {% csrf_token %}
+        <div class="form__input">
+            <input required="required" type="text" name="name" placeholder=" ">
+                <span>Producto</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <label for="category">
+                Categoría:
+                <select name="category" id="category">
+                    <option value="Alimento para Gatos">Alimento para Gatos</option>
+                    <option value="Alimento para Perros">Alimento para Perros</option>
+                    <option value="Juguetes">Juguetes</option>
+                    <option value="Accesorios">Accesorios</option>
+                    <option value="Indumentaria">Indumentaria</option>
+                </select>
+            </label>
+        </div>
+        <div class="form__input">
+            <label for="nationality">
+                Nacionalidad:
+                <select name="nationality" id="nationality">
+                    <option value="Nacional">Nacional</option>
+                    <option value="Importado">Importado</option>
+                </select>
+            </label>
+        </div>
+        <div class="form__input">
+            <input required="required" type="number" name="price" placeholder=" ">
+                <span>Precio</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="number" name="stock" placeholder=" ">
+                <span>Stock</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="img" placeholder=" ">
+                <span>URL de Imagen</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" max="40" name="short_description" placeholder=" ">
+                <span>Descripción Corta</span>
+            <i></i>
+        </div>
+        <div class="form__body">
+            <textarea name = "description" maxlength="400" required="required" placeholder="Escriba aquí la descripción completa..."></textarea>
+            <i></i>
+        </div>
+        <div class="form__buttons">
+            <button type="submit" value="send" class="form__button">
+                Guardar Producto
+            </button>
+            <button type="reset" class="form__button" id="button__logout">
+                Resetear Campos
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

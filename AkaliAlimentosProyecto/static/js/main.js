@@ -4,11 +4,10 @@ forms.forEach(form => {
 });
 
 function handleSubmit(event) {
-    console.log('hola')
     event.preventDefault();
-    let form = event.target;
-
-    fetch(form.action, {
+    const form = event.target;
+    const url = 'http://127.0.0.1:8000/manageCart';
+    fetch(url, {
         method: form.method,
         body: new FormData(form),
         headers: {
@@ -37,3 +36,36 @@ function displayToast(message, isSuccess) {
         }
     }).showToast();
 };
+
+let cartForms = document.querySelectorAll('.carttoproduct__form');
+cartForms.forEach(form => {
+    form.addEventListener('submit', cartDelete);
+});
+
+function cartDelete(event) {
+    event.preventDefault();
+    const form = event.target;
+    fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+            "X-CSRFToken": form.querySelector('input[name="csrfmiddlewaretoken"]').value,
+        },
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                displayToast(data.message, data.success);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        });
+};
+
+const redirectToLogin = () => {
+    console.log('hola')
+    window.location.href = "/login";
+}

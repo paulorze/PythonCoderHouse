@@ -1,0 +1,77 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    Actualizar Producto: {{product.name}}
+</h1>
+<div class="addproduct">
+    {% if form.errors %}
+    <p class="errormsg">Por favor, verifique los datos ingresados</p>
+    {% endif %}
+    <form action="" method="post" class="form form__addproduct">
+        {% csrf_token %}
+        <div class="form__input">
+            <input required="required" type="text" name="name" placeholder=" " value="{{product.name}}">
+                <span>Producto</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <label for="category">
+                Categoría:
+                <select name="category" id="category">
+                    <option {% if product.category == "Alimento para Gatos" %} selected{% endif %} value="Alimento para Gatos">Alimento para Gatos</option>
+                    <option {% if product.category == "Alimento para Perros" %}selected{% endif %} value="Alimento para Perros">Alimento para Perros</option>
+                    <option {% if product.category == "Juguetes" %}selected{% endif %} value="Juguetes">Juguetes</option>
+                    <option {% if product.category == "Accesorios" %}selected{% endif %} value="Accesorios">Accesorios</option>
+                    <option {% if product.category == "Indumentaria" %}selected{% endif %} value="Indumentaria">Indumentaria</option>
+                </select>
+            </label>
+        </div>
+        <div class="form__input">
+            <label for="nationality">
+                Nacionalidad:
+                <select name="nationality" id="nationality" value="{{product.nationality}}">
+                    <option {% if product.nationality == "Nacional" %}selected{% endif %} value="Nacional">Nacional</option>
+                    <option {% if product.nationality == "Importado" %}selected{% endif %} value="Importado">Importado</option>
+                </select>
+            </label>
+        </div>
+        <div class="form__input">
+            <input required="required" type="number" name="price" placeholder=" " value="{{product.price}}">
+                <span>Precio</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="number" name="stock" placeholder=" " value="{{product.stock}}">
+                <span>Stock</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" name="img" placeholder=" " value="{{product.img}}">
+                <span>URL de Imagen</span>
+            <i></i>
+        </div>
+        <div class="form__input">
+            <input required="required" type="text" max="40" name="short_description" placeholder=" " value="{{product.short_description}}">
+                <span>Descripción Corta</span>
+            <i></i>
+        </div>
+        <div class="form__body">
+            <textarea name = "description" maxlength="400" required="required" placeholder="Escriba aquí la descripción completa..." >{{product.description}}</textarea>
+            <i></i>
+        </div>
+        <div class="form__buttons">
+            <button type="submit" value="send" class="form__button">
+                Guardar Producto
+            </button>
+            <button type="reset" class="form__button" id="button__logout">
+                Resetear Campos
+            </button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

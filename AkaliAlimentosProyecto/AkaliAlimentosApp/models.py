@@ -13,6 +13,12 @@ class User(AbstractUser):
     # is_staff= models.BooleanField(default = False)
     # is_superuser = models.BooleanField(default = False)
 
+class Avatar(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    img = models.ImageField(upload_to='avatars', null=True, blank=True)
+    def __str__ (self):
+        return f"{self.user} - {self.img}"
+
 class Product(models.Model):
     name = models.CharField(max_length=40, unique = True)
     category = models.CharField(max_length=20)
@@ -31,6 +37,9 @@ class CartToProduct(models.Model):
     cart = models.ForeignKey(Cart, on_delete = models.CASCADE, default = 1)
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     quantity  = models.PositiveIntegerField()
+    
+    def calculate_subtotal(self):
+        return self.quantity * self.product.price
 
 class Order(models.Model):
     username = models.CharField(max_length=20)
@@ -38,13 +47,15 @@ class Order(models.Model):
     last_name = models.CharField(max_length=20)
     email = models.CharField(max_length=30)
     address = models.CharField(max_length=30)
-    products = models.ManyToManyField(Product, through='OrderToProduct')
     purchase_time = models.DateTimeField(auto_now_add=True)
+    total = models.DecimalField(max_digits=14, decimal_places=2)
 
 class OrderToProduct(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete = models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')
+    product_name = models.CharField(max_length=40)
+    product_price = models.DecimalField(max_digits=8, decimal_places=2)
     quantity = models.PositiveIntegerField()
+    subtotal = models.DecimalField(max_digits=8, decimal_places=2)
 
 class Contact(models.Model):
     name = models.CharField(max_length=50)

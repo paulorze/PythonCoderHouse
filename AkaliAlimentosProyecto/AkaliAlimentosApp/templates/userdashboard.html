@@ -29,9 +29,23 @@
         </p>
     </div>
     <div class="user__dashboard__aside">
-        <a href="{% url 'index' %}">
+        <a href="{% url 'orders' %}">
             <button class="form__button">
-                Modificar Datos
+                {% if user.is_superuser%}
+                Todas las Compras
+                {% else %}
+                Últimas Compras
+                {% endif %}
+            </button>
+        </a>
+        <a href="{% url 'userUpdate' %}">
+            <button class="form__button">
+                Modificar Perfil
+            </button>
+        </a>
+        <a href="{% url 'passwordUpdate' %}">
+            <button class="form__button">
+                Cambiar Contraseña
             </button>
         </a>
         <a href="{% url 'logout' %}">

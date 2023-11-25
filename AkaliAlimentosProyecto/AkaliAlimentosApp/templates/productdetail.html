@@ -1,0 +1,68 @@
+{% extends 'parent.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>
+    {{product.name}}
+</h1>
+<div class="detalle__subtitulo">
+    <h3>
+        Categoría: {{product.category}}
+    </h3>
+    <h3>
+        Origen: {{product.nationality}}
+    </h3>
+</div>
+<div class="detalle__preciostock">
+    <h2>
+        Precio: ${{product.price}}
+    </h2>
+    <h2>
+        Stock: {{product.stock}} uds.
+    </h2>
+    <form action="" method="post" class="card__form" id="detalle__form">
+        {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{product.pk}}">
+        {% if "Alimento" in product.category %}
+        <select name="quantity" id="" class="cantidad">
+            <option value="1">1 kg.</option>
+            <option value="2">2 kg.</option>
+            <option value="3">3 kg.</option>
+            <option value="4">4 kg.</option>
+            <option value="5">5 kg.</option>
+            <option value="6">6 kg.</option>
+            <option value="7">7 kg.</option>
+            <option value="8">8 kg.</option>
+            <option value="9">9 kg.</option>
+            <option value="10">10 kg.</option>
+        </select>
+        {% else %}
+        <select name="quantity" id="" class="cantidad">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        {% endif %}
+        {% if user.is_authenticated %}
+        <button type="submit" class="card__boton">
+            Añadir al carrito
+        </button>
+        {% else %}
+        <button type="button" class="card__boton" onclick="redirectToLogin()">
+            Añadir al carrito
+        </button>
+        {% endif %}
+    </form>
+</div>
+<div class="detalle__imagentexto">
+    <img src={{product.img}} alt="{{product.name}}">
+    <p>
+        {{product.description}}
+    </p>
+</div>
+
+{% endblock content %}
